@@ -14,10 +14,6 @@ variable "location" {
   type = string
 }
 
-variable "network_interface_ids" {
-  description = "The list of network interface IDs to associate with the virtual machine"
-  type        = list(string)
-}
 
 variable "vm_size" {
   description = "The size of the virtual machine"
