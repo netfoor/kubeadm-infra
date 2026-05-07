@@ -34,3 +34,9 @@ variable "tags" {
   type        = map(string)
     
 }
+
+variable "subnet_id" {
+  description = "The ID of the subnet to which the network interface will be connected"
+  type        = string  
+  
+}
