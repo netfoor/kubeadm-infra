@@ -1,0 +1,18 @@
+# Terraform state files
+*.tfstate
+*.tfstate.*
+
+# Terraform directories
+.terraform/
+terraform.tfvars
+
+# OS files
+.DS_Store
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.iml
