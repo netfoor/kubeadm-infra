@@ -1,30 +1,16 @@
-variable "virtual_network_name" {
-  description = "The name of the virtual network"
+variable "vpc_cidr" {
+  description = "The CIDR block for the VPC."
   type        = string
-}   
+  default = "10.0.0.0/16"
+}
 
-variable "address_space" {
-  description = "The address space for the virtual network"
+variable "public_subnet_cidrs" {
+  description = "The CIDR block for the public subnet."
   type        = list(string)
-}
-
-variable "location" {
-  description = "The location of the virtual network provided by resource group"
-  type        = string
-}
-
-variable "resource_group_name" {
-  description = "The name of the main resource group"
-  type        = string
-  
+  default = ["10.0.1.0/24"]
 }
 
 variable "tags" {
-  description = "The tags for the virtual network"
+  description = "The tags for the VPC and its subnets."
   type        = map(string)
-}
-
-variable "address_prefixes" {
-  description = "The address prefixes for the subnet"
-  type        = list(string)
 }

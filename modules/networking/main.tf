@@ -1,18 +1,45 @@
-resource "azurerm_virtual_network" "vnet" {
-  name                = var.virtual_network_name
-  address_space       = var.address_space
-
-
-  location            = var.location
-  resource_group_name = var.resource_group_name
-
-  tags = var.tags
+data "aws_availability_zones" "availability_zones" {
+  state = "available"
+  
 }
 
-resource "azurerm_subnet" "subnet" {
-  name                 = "${var.virtual_network_name}-subnet"
-  virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes     = var.address_prefixes
+resource "aws_vpc" "vpc" {
+  cidr_block = var.vpc_cidr
+
+  enable_dns_support = true
+  enable_dns_hostnames = true
+
+  tags = var.tags
+
+}
+
+resource "aws_subnet" "public_subnet" {
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = var.public_subnet_cidrs[0]
+  availability_zone = data.aws_availability_zones.availability_zones.names[0]
+  map_public_ip_on_launch = true
+  tags              = var.tags
   
-  resource_group_name  = var.resource_group_name
+}
+
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.vpc.id
+  tags   = var.tags
+
+}
+
+resource "aws_route_table" "rt" {
+  vpc_id = aws_vpc.vpc.id
+  route = {
+    cidr_block = "0.0.0/0"
+    gateway_id = aws_internet_gateway.igw.id
+  }
+  tags   = var.tags
+  
+}
+
+resource "aws_route_table_association" "public_subnet_association" {
+  subnet_id      = aws_subnet.public_subnet.id
+  route_table_id = aws_route_table.rt.id
+  
 }

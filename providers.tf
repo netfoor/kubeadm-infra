@@ -1,20 +1,14 @@
 terraform {
   required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~> 3.0.2"
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.92"
     }
   }
-  required_version = ">= 1.1.0"
+
+  required_version = ">= 1.2"
 }
 
-provider "azurerm" {
-  features {
-
-  }
-}
-
-resource "azurerm_resource_group" "rg" {
-  name     = "rg-terraform"
-  location = "eastus"
+provider "aws" {
+  region = "us-west-2"
 }

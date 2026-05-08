@@ -1,19 +1,19 @@
-variable "virtual_network_name" {
-  description = "The name of the virtual network to create."
+variable "ami_id" {
+  description = "The AMI ID to use for the instance."
   type        = string
-
+  default     = "ami-0fe18bc3cfa53a248"
 }
 
-variable "address_space" {
-  description = "The address space of the virtual network."
-  type        = list(string)
-
+variable "instance_type" {
+  description = "The type of instance to create."
+  type        = string
+  default     = "t3.small"
 }
 
-
-variable "address_prefixes" {
-  description = "The address prefixes to use for the virtual network."
-  type        = list(string)
+variable "security_group_name" {
+  description = "The name of the network security group to create."
+  type        = string
+  default     = "nsg-terraform-kubeadm"
 }
 
 variable "tags" {
@@ -21,28 +21,7 @@ variable "tags" {
   type        = map(string)
   default = {
     environment = "dev"
-    project     = "terraform-azure-kubeadm"
+    project     = "terraform-aws-kubeadm"
     owner       = "Fortino Romero"
   }
-}
-
-variable "vm_name" {
-  description = "The name of the virtual machine to create."
-  type        = string
-}
-
-variable "vm_size" {
-  description = "The size of the virtual machine to create."
-  type        = string
-}
-
-variable "disk_size_gb" {
-  description = "The size of the OS disk in GB."
-  type        = number
-}
-
-variable "security_group_name" {
-  description = "The name of the network security group to create."
-  type        = string
-
 }

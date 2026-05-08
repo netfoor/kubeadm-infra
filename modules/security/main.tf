@@ -1,26 +1,24 @@
-resource "azurerm_network_security_group" "sg" {
-  name = var.security_group_name
-  location = var.location
-  resource_group_name = var.resource_group_name
+resource "aws_security_group" "sg" {
+  name        = var.security_group_name
+  description = "Security group for the virtual machine"
+  vpc_id      = module.networking.vpc_id
+
+  ingress = {
+    description = "Allow SSH"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress = {
+    description = "Allow all TCP/UDP outbound traffic"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   tags = var.tags
-}
-
-resource "azurerm_network_security_rule" "allow_ssh" {
-  name                       = "AllowSSH"
-  priority                   = 1001
-  direction                  = "Inbound"
-  access                     = "Allow"
-  protocol                   = "Tcp"
-  source_port_range          = "*"
-  destination_port_range     = "22"
-  source_address_prefix      = "*"
-  destination_address_prefix = "*"
-  resource_group_name = var.resource_group_name
-  network_security_group_name = azurerm_network_security_group.sg.name
-}
-
-resource "azurerm_network_interface_security_group_association" "association" {
-  network_interface_id      = var.id_interface
-  network_security_group_id = azurerm_network_security_group.sg.id
+  
 }
