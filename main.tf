@@ -15,5 +15,6 @@ module "compute" {
 module "security" {
   source              = "./modules/security"
   security_group_name = var.security_group_name
+  vpc_id              = module.networking.vpc_id
   tags                = var.tags
 }
