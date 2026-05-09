@@ -1,7 +1,7 @@
 variable "ami_id" {
   description = "The AMI ID to use for the instance."
   type        = string
-  default     = "ami-0fe18bc3cfa53a248"
+  default     = "ami-091138d0f0d41ff90"
 }
 
 variable "instance_type" {
@@ -24,4 +24,9 @@ variable "tags" {
     project     = "terraform-aws-kubeadm"
     owner       = "Fortino Romero"
   }
+}
+
+variable "public_key_path" {
+  description = "The path to the public key file."
+  type        = string
 }

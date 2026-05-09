@@ -21,3 +21,13 @@ variable "tags" {
   type        = map(string)
   
 }
+
+variable "key_name" {
+  description = "The name of the key pair to use for the instance"
+  type        = string
+}
+
+variable "security_group_id" {
+  description = "The ID of the security group to associate with the instance"
+  type        = string
+}
