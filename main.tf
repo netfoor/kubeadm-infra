@@ -1,7 +1,4 @@
-resource "aws_key_pair" "ssh_key" {
-  key_name   = "aws-ssh-key-tf"
-  public_key = file(var.public_key_path)
-}
+
 
 module "networking" {
   source = "./modules/networking"
@@ -22,7 +19,7 @@ module "compute" {
   instance_type = var.instance_type
   subnet_id     = module.networking.id_subnet
   tags          = var.tags
-  key_name      = aws_key_pair.ssh_key.key_name
+  public_key_path = var.public_key_path
   security_group_id = module.security.security_group_id
 }
 
