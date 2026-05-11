@@ -1,3 +1,5 @@
 output "public_ip" {
-  value = module.compute.public_ip
+value = [
+  for instance in module.compute : instance.public_ip
+]
 }

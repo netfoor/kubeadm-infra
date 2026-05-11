@@ -30,3 +30,9 @@ variable "public_key_path" {
   description = "The path to the public key file."
   type        = string
 }
+
+variable "instances" {
+  description = "A list of instances to create."
+  type        = list(string)
+  default     = ["instance1", "instance2"]
+}
