@@ -20,6 +20,7 @@ variable "tags" {
   description = "A map of tags to assign to the resource."
   type        = map(string)
   default = {
+    name        = "terraform-kubeadm"
     environment = "dev"
     project     = "terraform-aws-kubeadm"
     owner       = "Fortino Romero"
@@ -32,7 +33,8 @@ variable "public_key_path" {
 }
 
 variable "instances" {
-  description = "A list of instances to create."
-  type        = list(string)
-  default     = ["instance1", "instance2"]
+  description = "Map of servers to create"
+  type = map(object({
+    instance_type = string
+  }))
 }

@@ -32,9 +32,3 @@ variable "security_group_id" {
   description = "The ID of the security group to associate with the instance"
   type        = string
 }
-
-variable "public_key_path" {
-  description = "The path to the public key file to use for the key pair"
-  type        = string
-  
-} 
